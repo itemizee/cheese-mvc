@@ -1,10 +1,8 @@
 package org.launchcode.cheesemvc.models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.*;
-import javax.persistence.Entity;
+import java.util.List;
 
 @Entity
 public class Cheese {
@@ -27,6 +25,9 @@ public class Cheese {
 
     @ManyToOne
     private Category category;
+
+    @ManyToMany(mappedBy = "cheeses")
+    private List<Menu> menus;
 
 
     public Cheese(String aName, String aDescription, Integer aRating, Category aCat){

@@ -15,12 +15,14 @@
         <tr>
             <th>Name</th>
             <th>Description</th>
+            <th>Category</th>
             <th>Remove Checkbox</th>
         </tr>
 
         <tr th:each="cheese : ${cheeses}">
             <td th:text="${cheese.getName()}"> </td>
             <td th:text="${cheese.getDescription()}"></td>
+            <td th:text="${cheese.category.name}"></td>
             <td><input type="checkbox" name="cheeseId" th:value="${cheese.getId()}"/></td>
         </tr>
     </table>

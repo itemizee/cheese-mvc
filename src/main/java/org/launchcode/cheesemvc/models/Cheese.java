@@ -1,19 +1,46 @@
 package org.launchcode.cheesemvc.models;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.*;
+import javax.persistence.Entity;
+
+@Entity
 public class Cheese {
-    private String name;
-    private String description;
-    private static int nextId = 1;
+
+    @Id
+    @GeneratedValue
     private int id;
 
-    public Cheese(String aName, String aDescription){
+    @NotNull
+    @Size(min=3, max=15)
+    private String name;
+
+    @NotNull
+    @Size(min=1, message = "Description must not be empty")
+    private String description;
+
+    @Min(value=1, message="Must be 1-5")
+    @Max(value=5, message="Must be 1-5")
+    private Integer rating;
+
+    @ManyToOne
+    private Category category;
+
+
+    public Cheese(String aName, String aDescription, Integer aRating, Category aCat){
         name = aName;
         description = aDescription;
-        id = nextId++;
+        rating = aRating;
+        category = aCat;
     }
 
     public Cheese(){
-        this("","");
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName(){
@@ -24,13 +51,6 @@ public class Cheese {
         return description;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public void setName(String aName){
         name = aName;
@@ -38,5 +58,21 @@ public class Cheese {
 
     public void setDescription(String aDescription){
         description = aDescription;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 }
